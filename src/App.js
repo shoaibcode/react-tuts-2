@@ -3,7 +3,6 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import AddTodo from "./AddTodo";
-import TodoItem from "./TodoItem";
 
 class App extends Component {
   state = {
@@ -17,23 +16,6 @@ class App extends Component {
         completed: true
       }
     ]
-  };
-
-  toggleComplete = index => {
-    const newTodos = this.state.todos.map((todo, i) => {
-      if (index === i) {
-        return {
-          ...todo,
-          completed: !todo.completed
-        };
-      }
-
-      return todo;
-    });
-
-    this.setState({
-      todos: newTodos
-    });
   };
 
   addTodoToState = text => {
@@ -50,14 +32,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.todos.map((todo, index) => {
-          return (
-            <TodoItem
-              toggleComplete={this.toggleComplete}
-              todo={todo}
-              index={index}
-              key={index}
-            />
-          );
+          return <li key={index}>{todo.text}</li>;
         })}
 
         <AddTodo addTodoToState={this.addTodoToState} />
