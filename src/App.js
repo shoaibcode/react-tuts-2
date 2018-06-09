@@ -2,34 +2,42 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import Counter from "./Counter";
+import AddTodo from "./AddTodo";
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      count: 0
+      todos: [
+        {
+          text: "Buy Milk"
+        },
+        {
+          text: "Buy Egg"
+        }
+      ]
     };
-
-    this.incrementCounter = this.incrementCounter.bind(this);
   }
 
-  incrementCounter() {
-    let count = this.state.count;
+  addTodoToState = text => {
+    const newTodos = this.state.todos.concat({
+      text
+    });
 
     this.setState({
-      count: ++count
+      todos: newTodos
     });
-  }
+  };
 
   render() {
     return (
       <div className="App">
-        <Counter
-          count={this.state.count}
-          incrementCounter={this.incrementCounter}
-        />
+        {this.state.todos.map((todo, index) => {
+          return <li key={index}>{todo.text}</li>;
+        })}
+
+        <AddTodo addTodoToState={this.addTodoToState} />
       </div>
     );
   }
