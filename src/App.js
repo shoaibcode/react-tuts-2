@@ -2,34 +2,65 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import Counter from "./Counter";
+import AddTodo from "./AddTodo";
+import TodoItem from "./TodoItem";
 
 class App extends Component {
-  constructor() {
-    super();
+  state = {
+    todos: [
+      {
+        text: "Buy Milk",
+        completed: false
+      },
+      {
+        text: "Buy Egg",
+        completed: true
+      }
+    ]
+  };
 
-    this.state = {
-      count: 0
-    };
+  toggleComplete = index => {
+    const newTodos = this.state.todos.map((todo, i) => {
+      if (index === i) {
+        return {
+          ...todo,
+          completed: !todo.completed
+        };
+      }
 
-    this.incrementCounter = this.incrementCounter.bind(this);
-  }
-
-  incrementCounter() {
-    let count = this.state.count;
+      return todo;
+    });
 
     this.setState({
-      count: ++count
+      todos: newTodos
     });
-  }
+  };
+
+  addTodoToState = text => {
+    const newTodos = this.state.todos.concat({
+      text
+    });
+
+    this.setState({
+      todos: newTodos
+    });
+  };
 
   render() {
     return (
       <div className="App">
-        <Counter
-          count={this.state.count}
-          incrementCounter={this.incrementCounter}
-        />
+        {this.state.todos.map((todo, index) => {
+          return (
+            <TodoItem
+              toggleComplete={this.toggleComplete}
+              todo={todo}
+              index={index}
+              key={index}
+            />
+          );
+        })}
+
+        <AddTodo addTodoToState={this.addTodoToState} />
       </div>
     );
   }
