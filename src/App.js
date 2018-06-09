@@ -52,6 +52,23 @@ class App extends Component {
     });
   };
 
+  editTodoFromState = (index, newText) => {
+    const newTodos = this.state.todos.map((todo, i) => {
+      if (index === i) {
+        return {
+          ...todo,
+          text: newText
+        };
+      }
+
+      return todo;
+    });
+
+    this.setState({
+      todos: newTodos
+    });
+  };
+
   addTodoToState = text => {
     const newTodos = this.state.todos.concat({
       text
@@ -70,6 +87,7 @@ class App extends Component {
             <TodoItem
               toggleComplete={this.toggleComplete}
               deleteTodoFromState={this.deleteTodoFromState}
+              editTodoFromState={this.editTodoFromState}
               todo={todo}
               index={index}
               key={index}
