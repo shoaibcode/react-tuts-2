@@ -38,7 +38,8 @@ class App extends Component {
 
   addTodoToState = text => {
     const newTodos = this.state.todos.concat({
-      text
+      text,
+      completed: false
     });
 
     this.setState({
