@@ -36,6 +36,22 @@ class App extends Component {
     });
   };
 
+  deleteTodoFromState = index => {
+    const newTodos = this.state.todos.filter((todo, i) => {
+      // if (index === i) {
+      //   return false;
+      // }
+      //
+      // return true;
+
+      return index === i ? false : true;
+    });
+
+    this.setState({
+      todos: newTodos
+    });
+  };
+
   addTodoToState = text => {
     const newTodos = this.state.todos.concat({
       text
@@ -53,6 +69,7 @@ class App extends Component {
           return (
             <TodoItem
               toggleComplete={this.toggleComplete}
+              deleteTodoFromState={this.deleteTodoFromState}
               todo={todo}
               index={index}
               key={index}
