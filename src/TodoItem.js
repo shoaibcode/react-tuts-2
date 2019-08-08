@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class TodoItem extends React.Component {
   state = {
@@ -59,5 +60,17 @@ class TodoItem extends React.Component {
     );
   }
 }
+
+TodoItem.propTypes = {
+  toggleComplete: PropTypes.func.isRequired,
+  deleteTodoFromState: PropTypes.func.isRequired,
+  editTodoFromState: PropTypes.func.isRequired,
+  todo: PropTypes.object.isRequired,
+  index: PropTypes.number
+};
+
+TodoItem.defaultProps = {
+  index: 0
+};
 
 export default TodoItem;
