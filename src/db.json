@@ -1,8 +1,9 @@
 {
   "todos": [
     {
-      "text": "Buy Milk",
-      "completed": true
+      "text": "Learn Redux",
+      "completed": false,
+      "id": 2
     }
   ]
 }
